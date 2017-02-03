@@ -64,7 +64,11 @@ class MiniTest::Spec
     it "permits #{value.inspect} as #{type_casted.inspect}" do
       permitted = params(:value => value).permit(:value => subject)
       permitted = permitted.to_h if Rails::VERSION::MAJOR >= 5
-      permitted[:value].must_equal type_casted
+      if defined?(assert_nil) && type_casted.nil?
+        assert_nil permitted[:value]
+      else
+        permitted[:value].must_equal type_casted
+      end
     end
   end
 
