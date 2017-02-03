@@ -7,6 +7,7 @@ require 'bump/tasks'
 Rake::TestTask.new(:test) do |t|
   t.pattern = 'test/**/*_test.rb'
   t.verbose = false
+  t.warning = false
 end
 
 task :default => "wwtd:local"
